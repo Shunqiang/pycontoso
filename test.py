@@ -23,5 +23,5 @@ time.sleep(3)
 next = driver.find_element(by=By.XPATH, value="//a[contains(text(),'下一页 >')]")
 
 next.click()
-time.sleep(3)
+# time.sleep(3)
 driver.quit()
