@@ -1,13 +1,20 @@
 import scrapy
-
+from baidu.items import BaiduItem
 
 class BaiduaSpider(scrapy.Spider):
     name = "baidua"
-    allowed_domains = ["https://bj.58.com"]
-    start_urls = ["https://www.58.com/fangdichan/?PGTID=0d002408-0000-052d-7d50-af041bfbf6e3&ClickID=1"]
+    # allowed_domains = ["https://bj.58.com"]
+    start_urls = ["https://quotes.toscrape.com/page/1/"]
 
     def parse(self, response):
-        print(response.body.decode('utf8'))
+        # print(response.body.decode('utf8'))
         # text =response.xpath('//div[@id="u1"]')
-        print(text)
-        pass
+        # print(response.text)
+        # print(123333)
+        next_page = response.css("li.next a::attr(href)").get()
+        book = BaiduItem(name=next_page, src=11)
+        # print('22233333333333333333333')
+        yield book
+        # for href in response.css("ul.pager a::attr(href)"):
+        #     yield response.follow(href, callback=self.parse)
+        # pass
