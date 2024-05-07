@@ -1,5 +1,5 @@
 import scrapy
-from baidu.items import BaiduItem
+from zhipin.items import ZhipinItem
 
 class BaiduaSpider(scrapy.Spider):
     name = "baidua"
