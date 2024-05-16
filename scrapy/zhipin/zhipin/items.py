@@ -6,7 +6,8 @@
 import scrapy
 
 
-class BaiduItem(scrapy.Item):
+class ZhipinItem(scrapy.Item):
     # define the fields for your item here like:
+    # name = scrapy.Field()
+    time = scrapy.Field()
     name = scrapy.Field()
-    src = scrapy.Field()

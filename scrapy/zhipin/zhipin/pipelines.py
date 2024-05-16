@@ -8,10 +8,12 @@
 from itemadapter import ItemAdapter
 
 
-class BaiduPipeline:
-    def open_spider(self, spider):
-        print(2222222)
+class ZhipinPipeline:
     def process_item(self, item, spider):
-        with open('book.json', 'w', encoding='utf-8') as fb:
-            fb.write(str(item))
+        print(item)
+        print(122222)
+        with open(file='全国-热门城市岗位数据.csv', mode='a+', encoding='utf8') as f:
+            f.write(
+                '{name},{time}\n'.format(
+                    **item))
         return item
