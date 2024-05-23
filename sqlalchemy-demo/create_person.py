@@ -53,8 +53,8 @@ except CompileError as e:
 #     connection.commit()
 
 # 删除
-with engine.connect() as connection:
-    query = person.delete().where(person.c.phone =='123-456-7893')
-    connection.execute(query)
-    connection.commit()
+# with engine.connect() as connection:
+#     query = person.delete().where(person.c.phone =='123-456-7893')
+#     connection.execute(query)
+#     connection.commit()
     
