@@ -11,9 +11,10 @@ session = Session()
 # 使用scalar， 结果最多一条， 也可以没有
 
 result = session.query(Women).filter(Women.name == 'jesse').update({
-    Women.adress: 'beijing'
+    Women.adress: 'beijing1'
 })
 
+print(result)
 session.commit()
 # for row in result:
 # print(result.name, result.birthday, result.adress)
