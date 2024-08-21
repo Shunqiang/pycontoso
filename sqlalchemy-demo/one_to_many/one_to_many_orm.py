@@ -14,32 +14,26 @@ int_pk = Annotated[str,  mapped_column(String(128), unique=True, nullable=False)
 
 default_time = Annotated[datetime.datetime, mapped_column(nullable=True, server_default=func.now())]
 
-association_table = Table(
-    "user_role",
-    Base.metadata,
-    Column("user_id", Integer, ForeignKey("users.id"), primary_key=True),
-    Column("role_id", Integer, ForeignKey("roles.id"), primary_key=True)
-)
-
-class User(Base):
-    __tablename__ = 'users'
-    id: Mapped[int] = mapped_column(primary_key=True)
-    password: Mapped[int] = mapped_column()
-
-    name: Mapped[int_pk]
-    roles: Mapped[List['Role']] = relationship(secondary=association_table,lazy=False, back_populates='users')
-    def __repr__(self):
-        return f'id: {self.id}, name: {self.name}'
-    
-    
-class Role(Base):
-    __tablename__ = 'roles'
-    # role_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
+class Department(Base):
+    __tablename__ = 'department'
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[int_pk]
-    users: Mapped[List['User']] = relationship(secondary=association_table, lazy=False, back_populates='roles')
+    create_time: Mapped[default_time]
+    employees: Mapped[List['Employee']] = relationship(back_populates="department")
     def __repr__(self):
-        return f'id: {self.id},name: {self.name},'
+        return f'id: {self.id}, name: {self.name}, create_time:{self.create_time}'
+    
+    
+class Employee(Base):
+    __tablename__ = 'employee'
+    
+    id: Mapped[int] = mapped_column(primary_key=True)
+    dep_id: Mapped[int] = mapped_column(ForeignKey('department.id'))
+    name: Mapped[int_pk]
+    birthday: Mapped[datetime.datetime]
+    department: Mapped[Department] = relationship(lazy=False, back_populates="employees")
+    def __repr__(self):
+        return f'id: {self.id}, dep_id: {self.dep_id}, name: {self.name}, birthday:{self.birthday}'
     
 Base.metadata.create_all(engine)
 
