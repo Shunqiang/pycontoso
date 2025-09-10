@@ -33,6 +33,6 @@ for e in text_box:
 # time.sleep(3)
 # next = driver.find_element(by=By.XPATH, value="//a[contains(text(),'下一页 >')]")
 
-# next.click()
+next.click()
 # # time.sleep(3)
 driver.quit()
