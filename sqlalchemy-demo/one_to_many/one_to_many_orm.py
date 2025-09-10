@@ -6,7 +6,19 @@ import datetime
 from sqlalchemy.sql import func
 from typing_extensions import Annotated
 
-engine = create_engine('mysql+pymysql://root:123456@localhost:3306/boss_zp')
+# Use environment variables for database credentials
+import os
+DB_USER = os.getenv('DB_USER', 'root')
+DB_PASSWORD = os.getenv('DB_PASSWORD', '')
+DB_HOST = os.getenv('DB_HOST', 'localhost')
+DB_PORT = os.getenv('DB_PORT', '3306')
+DB_NAME = os.getenv('DB_NAME', 'boss_zp')
+
+# Construct connection string securely
+if not DB_PASSWORD:
+    raise ValueError("DB_PASSWORD environment variable must be set")
+
+engine = create_engine(f'mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}')
 Base = declarative_base()
 
 
